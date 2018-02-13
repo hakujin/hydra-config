@@ -21,8 +21,8 @@ in rec {
     nixexprinput = "src";
     description = project;
     inputs = {
-      src = mkFetchGithub "https://github.com/hakujin/${project}.git ${branch}";
-      nixpkgs = mkFetchGithub "https://github.com/NixOS/nixpkgs.git ${nixpkgs-src.rev}";
+      src = mkFetchGithub "ssh://git@github.com/hakujin/${project}.git ${branch}";
+      nixpkgs = mkFetchGithub "ssh://git@github.com/NixOS/nixpkgs.git ${nixpkgs-src.rev}";
     };
   };
   makePR = project: num: info: {
@@ -32,8 +32,8 @@ in rec {
       nixexprinput = "src";
       nixexprpath = "release.nix";
       inputs = {
-        nixpkgs = mkFetchGithub "https://github.com/NixOS/nixpkgs.git master";
-        src = mkFetchGithub "https://github.com/${info.base.repo.owner.login}/${info.base.repo.name}.git ${info.head.sha}";
+        nixpkgs = mkFetchGithub "ssh://git@github.com/NixOS/nixpkgs.git master";
+        src = mkFetchGithub "ssh://git@github.com/${info.base.repo.owner.login}/${info.base.repo.name}.git ${info.head.sha}";
       };
     };
   };
