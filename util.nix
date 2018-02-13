@@ -33,7 +33,7 @@ in rec {
       nixexprpath = "release.nix";
       inputs = {
         nixpkgs = mkFetchGithub "https://github.com/NixOS/nixpkgs.git master";
-        src = mkFetchGithub "https://github.com/${info.head.repo.owner.login}/${info.head.repo.name}.git ${info.head.ref}";
+        src = mkFetchGithub "https://github.com/${info.base.repo.owner.login}/${info.base.repo.name}.git ${info.head.sha}";
       };
     };
   };
