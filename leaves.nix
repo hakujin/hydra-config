@@ -3,7 +3,7 @@ let
   util = import ./util.nix;
   pkgs = import nixpkgs {};
   prs = builtins.fromJSON (builtins.readFile prsJSON);
-  prJobsets = pkgs.lib.listToAttrs (pkgs.lib.mapAttrsToList util.makePR (prs "leaves"));
+  prJobsets = pkgs.lib.listToAttrs (pkgs.lib.mapAttrsToList (util.makePR "leaves") prs);
   mainJobsets = with pkgs.lib; mapAttrs (name: settings: util.defaultSettings // settings) (rec {
     leaves = util.mkProject "leaves" "master" util.nixpkgs-src.rev;
   });
