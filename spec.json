@@ -3,15 +3,15 @@
   "hidden": false,
   "description": "PR jobsets",
   "nixexprinput": "src",
-  "nixexprpath": "release-pr.nix",
+  "nixexprpath": "leaves.nix",
   "checkinterval": 30,
   "schedulingshares": 100,
   "enableemail": false,
   "emailoverride": "",
   "keepnr": 10,
   "inputs":{
-    "src": { "type": "git", "value": "ssh://git@github.com/hakujin/leaves", "emailresponsible": false },
-    "nixpkgs": { "type": "git", "value": "ssh://git@github.com/NixOS/nixpkgs", "emailresponsible": false },
+    "src": { "type": "git", "value": "ssh://git@github.com/hakujin/hydra-config.git", "emailresponsible": false },
+    "nixpkgs": { "type": "git", "value": "ssh://git@github.com/NixOS/nixpkgs.git", "emailresponsible": false },
     "prsJSON": { "type": "githubpulls", "value": "hakujin leaves", "emailresponsible": false }
   }
 }
