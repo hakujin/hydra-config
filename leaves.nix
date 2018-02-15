@@ -1,16 +1,12 @@
-{ prsJSON, nixpkgs }:
+{ nixpkgs, prsJSON }:
 let
   util = import ./util.nix;
   pkgs = import nixpkgs {};
-  prs = builtins.fromJSON (builtins.readFile prsJSON);
+  prs = builtins.importJSON prsJSON;
   prJobsets = pkgs.lib.listToAttrs (pkgs.lib.mapAttrsToList (util.makePR "leaves") prs);
-  mainJobsets = with pkgs.lib; mapAttrs (name: settings: util.defaultSettings // settings) (rec {
-    leaves = util.mkProject "leaves" "master" util.nixpkgs-src.rev;
+  mainJobsets = pkgs.lib.mapAttrs (name: settings: util.defaultSettings // settings) (rec {
+    leaves = util.mkProject "leaves" "master";
   });
-  jobsetsAttrs = prJobsets // mainJobsets;
-  jobsetJson = pkgs.writeText "spec.json" (builtins.toJSON jobsetsAttrs);
 in {
-  jobsets = with pkgs.lib; pkgs.runCommand "spec.json" {} ''
-    cp ${jobsetJson} $out
-  '';
+  jobsets = pkgs.writeText "spec.json" (builtins.toJSON (prJobsets // mainJobsets));
 }
