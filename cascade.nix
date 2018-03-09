@@ -6,7 +6,8 @@ let
       mercury.mercury-web-backend = { inherit build gems; };
     })
   ];
-  pkgs = import ./pinned-nixpkgs.nix { inherit system overlays; };
+  pinned = import ./pinned-nixpkgs.nix { inherit system; };
+  pkgs = import pinned { inherit system overlays; };
   nixos-ec2 = import (pkgs.path + "/nixos") {
     inherit system;
     configuration = {
