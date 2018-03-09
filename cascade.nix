@@ -1,8 +1,7 @@
 { build, gems, ... }:
 let
   system = "x86_64-linux";
-  pinned = import ./pinned-nixpkgs.nix { inherit system; };
-  pkgs = import pinned { inherit system; };
+  pkgs = import ./pinned-nixpkgs.nix { inherit system; };
   nixos-ec2 = import (pkgs.path + "/nixos") {
     inherit system;
     configuration = {
@@ -17,7 +16,10 @@ let
         gc.automatic = true;
       };
       nixpkgs.config.packageOverrides = pkgs: {
-        mercury =  { inherit build gems; };
+        mercury =  {
+          build  = "${build}";
+          gems = "${gems}";
+        };
       };
 
       services = {
@@ -34,6 +36,7 @@ let
         };
       };
 
+      environment.systemPackages = [ "${build}" ];
       networking.firewall.allowedTCPPorts = [ 3000 ];
     };
   };
