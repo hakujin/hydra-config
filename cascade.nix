@@ -39,5 +39,6 @@ let
       networking.firewall.allowedTCPPorts = [ 3000 ];
     };
   };
-in
-  nixos-ec2.system
+in {
+  image = nixos-ec2.system;
+}
