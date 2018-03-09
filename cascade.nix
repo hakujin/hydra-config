@@ -34,7 +34,6 @@ let
         };
       };
 
-      environment.systemPackages = [ build ];
       networking.firewall.allowedTCPPorts = [ 3000 ];
     };
   };
