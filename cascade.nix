@@ -17,8 +17,8 @@ let
       };
       nixpkgs.config.packageOverrides = pkgs: {
         mercury =  {
-          build  = "${build}";
-          gems = "${gems}";
+          build  = build.outPath;
+          gems = gems.outPath;
         };
       };
 
@@ -36,7 +36,7 @@ let
         };
       };
 
-      environment.systemPackages = [ "${build}" ];
+      environment.systemPackages = [ build.outPath ];
       networking.firewall.allowedTCPPorts = [ 3000 ];
     };
   };
