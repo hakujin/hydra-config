@@ -1,13 +1,8 @@
 { build, gems, ... }:
 let
   system = "x86_64-linux";
-  overlays = [
-    (self: super: {
-      mercury =  { inherit build gems; };
-    })
-  ];
   pinned = import ./pinned-nixpkgs.nix { inherit system; };
-  pkgs = import pinned { inherit system overlays; };
+  pkgs = import pinned { inherit system; };
   nixos-ec2 = import (pkgs.path + "/nixos") {
     inherit system;
     configuration = {
@@ -20,6 +15,9 @@ let
       nix = {
         autoOptimiseStore = true;
         gc.automatic = true;
+      };
+      nixpkgs.config.packageOverrides = pkgs: {
+        mercury =  { inherit build gems; };
       };
 
       services = {
