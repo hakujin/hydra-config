@@ -36,8 +36,8 @@ in {
     };
 
     services.mercury-web-backend = {
-      package = mkDefault pkgs.mercury-web-backend-build4;
-      gems = mkDefault pkgs.mercury-web-backend-gems4;
+      package = mkDefault pkgs.mercury.build;
+      gems = mkDefault pkgs.mercury.gems;
     };
 
     systemd.services.mercury-web-backend-init = {

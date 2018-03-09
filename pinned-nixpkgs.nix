@@ -1,5 +1,5 @@
-{ system ? builtins.currentSystem, config ? {} }:
-with (import <nixpkgs> { inherit system config; });
+{ system ? builtins.currentSystem }:
+with (import <nixpkgs> { inherit system; });
 let
   json = lib.importJSON ./nixpkgs.json;
   src = fetchFromGitHub {

@@ -3,8 +3,7 @@ let
   system = "x86_64-linux";
   overlays = [
     (self: super: {
-      mercury-web-backend-build = build;
-      mercury-web-backend-gems = gems;
+      mercury =  { inherit build gems; };
     })
   ];
   pinned = import ./pinned-nixpkgs.nix { inherit system; };
